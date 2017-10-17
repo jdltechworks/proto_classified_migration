@@ -1,7 +1,7 @@
 import React from 'react'
-import Dropzone from 'react-dropzone'
-import _ from 'lodash'
+import eq from 'lodash/eq'
 import { Field } from 'redux-form'
+import pick from 'lodash/pick'
 
 /**
  * Must be binded inside a react render / component
@@ -9,53 +9,42 @@ import { Field } from 'redux-form'
  * @param  {string} field       name of the field
  * @return {react component}             return an html that is generated from react
  */
-export const renderField = function(fieldConfig, field) {
 
-    if(_.includes(['textarea', 'selectbox'], fieldConfig.tag)) {
-        return (
-          <Field key={field} name={field} component={(_field) => {
-            let { meta, input } = _field
-            return (
-            <div  className="form-group">
-              <fieldConfig.tag {...input} className="form-control" placeholder={fieldConfig.label} />
-              {meta.touched && meta.error ? <small>{meta.error}</small> : null}
-            </div>
-            )
-          }} />
-        )
-    }
-    if(_.eq(fieldConfig.type, 'file')) {
-        const { uploadedFiles } = this.state
-        const { images, uploadImage } = this.props
-        return (
-          <Field key={field} name={field} component={(_field) => {
-            let { meta, input } = _field
-            return (<div className="form-group">
-            <Dropzone name={field} multiple={true} onDrop={(file, e) => {
-              input.onChange('file')
-              uploadImage(file)
-            }} />
-            {meta.touched && meta.error ? <small>{meta.error}</small> : null}
-            </div>)
-          }} />
-        )
-    }
+
+export const renderField = function(fieldConfig, field) {
     return(
-        <Field key={field} type={fieldConfig.type} name={field} component={TextField} label={fieldConfig.label} />
+        <Field key={field}
+            type={fieldConfig.type}
+            name={field} config={fieldConfig}
+            component={FieldSetter}
+            label={fieldConfig.label} />
     )
 }
 
+const textAreaConfig = (type) => {
+    if(type == 'textarea') return ''
+    return 'input-lg'
+}
 
-export const TextField = function(_field) {
-  let { meta, input, label, type } = _field
+export const FieldSetter = function(_field) {
+
+  let { meta, input, label, config } = _field
+  const { rows, type } = config
+  const setClass = textAreaConfig(type)
+  console.log(meta);
+
+  const isFail = (meta.error && !meta.pristine) ||
+                (meta.submitFailed && meta.pristine)
+
   return (
-    <div  className="form-group">
-      <input {...input} type={type} className="form-control" placeholder={label}/>
+    <div  className={`form-group ${isFail ? 'has-error' : ''}`}>
+      <config.tag
+            {...input}
+            rows={rows}
+            type={type}
+            className={`form-input ${setClass}`}
+            placeholder={label} />
       {meta.touched && meta.error ? <small>{meta.error}</small> : null}
     </div>
   )
-}
-
-export const TextArea = (_field) => {
-
 }

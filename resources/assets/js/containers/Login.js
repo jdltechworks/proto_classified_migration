@@ -4,19 +4,7 @@ import { LOGIN } from '../models/Login'
 import { renderField } from '../helpers'
 import React, { Component, PropTypes } from 'react'
 import { Link } from 'react-router'
-
-
-const validate = (values) => {
-  const errors = {};
-  _.each(LOGIN, (type, field) => {
-    if(!values[field]) {
-      errors[field] = `${field} is blank`
-    }
-  });
-
-  return errors;
-}
-
+import validator from '../helpers/validator'
 
 class Login extends Component {
   componentDidMount() {
@@ -27,16 +15,16 @@ class Login extends Component {
   render() {
     let { handleSubmit } = this.props
     return (
-      <section className="login clearfix" style={{ paddingTop: '10%' }}>
-        <div className="row">
-          <div className="m-auto col-md-2 col-lg-2">
+      <section className="login clearfix container grid-xl" style={{ paddingTop: '10%' }}>
+        <div className="columns">
+          <div className="column col-4 col-ml-auto col-mr-auto">
             <form onSubmit={handleSubmit((props) => {this.submitForm(props)})}>
               <div className="card">
-                <div className="card-block">
-                  <div className="card-title">
+                <div className="card-header">
+                  <div class="card-title h5">
                     Log in to your account
                   </div>
-                  <div className="card-text">
+                  <div className="card-body">
                   <br />
 
                   {_.map(LOGIN, renderField.bind(this))}
@@ -58,5 +46,5 @@ class Login extends Component {
 
 export default reduxForm({
     form:'login',
-    validate
+    validate: validator(LOGIN)
 })(Login)
