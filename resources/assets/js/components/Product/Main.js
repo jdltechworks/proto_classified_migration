@@ -9,6 +9,11 @@ import Scroller from '../Scroller'
 
 class Product extends Component {
     componentDidMount() {
+        const { props } = this
+        const { actions, params } = props
+        const { Product } = actions
+        const { getProductBySlug } = Product
+        getProductBySlug(params.slug)
     }
 
     render() {

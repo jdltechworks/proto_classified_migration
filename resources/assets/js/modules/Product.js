@@ -8,7 +8,8 @@ export const initialState = {
     list: [],
     isFetching: false,
     error: {},
-    isAppending: true
+    isAppending: true,
+    product: {}
 }
 
 export const types = createConstants('product')(
@@ -16,7 +17,7 @@ export const types = createConstants('product')(
     'FETCHED',
     'ERROR',
     'FETCHING_SINGLE',
-    'FETCHING_SINGLE',
+    'FETCHED_SINGLE',
     'INITITAL_COLLECTION',
     'REQUESTING_MORE_PRODUCTS',
     'REQUEST_MORE_PRODUCTS_COMPLETE'
@@ -66,30 +67,31 @@ export const actions = {
         }
 
     },
-    getProductById(id) {
+    getProductBySlug(slug) {
         return (dispatch, getState) => {
             dispatch({ type: types.FETCHING_SINGLE })
-            return fetch(`/product/${id}`, {
+            return fetch(`/product/${slug}`, {
                 method: 'GET',
                 headers,
                 credentials: 'same-origin',
-            }).then(res => res.json())
-            .then(list => {
-                dispatch({ type: types.FETCHED_SINGLE, json })
+            }).then(res => {
+                return res.json()
+            })
+            .then(({ collection }) => {
+                dispatch({ type: types.FETCHED_SINGLE, collection })
             })
             .catch(error => dispatch({ type: types.ERROR, error }))
         }
     }
 }
 
-let listAppender = (prevState, newState) => {
-    return prevState.concat(newState)
-}
-
 
 export const reducer = createReducer({
     [types.INITITAL_COLLECTION]: (state, { list }) => {
         return {...state, list}
+    },
+    [types.FETCHED_SINGLE]: (state, { collection }) => {
+        return {...state, ...collection}
     },
     [types.REQUESTING_MORE_PRODUCTS]: (state, action) => {
         return {
@@ -104,9 +106,7 @@ export const reducer = createReducer({
         return { ...state, list }
     },
     [types.ERROR]: (state, { error }) => {
+        console.log(error)
         return { ...state, ...error }
-    },
-    [types.FETCHED_SINGLE]: (state, { json }) => {
-        return { ...state, ...json }
     }
 })
