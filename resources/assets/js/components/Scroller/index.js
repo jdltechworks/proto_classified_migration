@@ -38,8 +38,7 @@ class Scroller extends Component {
     }
     componentWillUnMount() {
         window.removeEventListener(
-            'scroll',
-            this.scrollObserver.bind(this)
+            'scroll'
         )
     }
     scrollObserver () {

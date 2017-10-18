@@ -17,14 +17,14 @@ class Login extends Component {
     return (
       <section className="login clearfix container grid-xl" style={{ paddingTop: '10%' }}>
         <div className="columns">
-          <div className="column col-4 col-ml-auto col-mr-auto">
+          <div className="column col-3 col-ml-auto col-mr-auto">
             <form onSubmit={handleSubmit((props) => {this.submitForm(props)})}>
-              <div className="card">
-                <div className="card-header">
-                  <div class="card-title h5">
+              <div className="panel">
+                <div className="panel-header">
+                  <div className="panel-title h5">
                     Log in to your account
                   </div>
-                  <div className="card-body">
+                  <div className="panel-body">
                   <br />
 
                   {_.map(LOGIN, renderField.bind(this))}

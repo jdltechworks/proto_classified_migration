@@ -26,16 +26,16 @@ class Register extends Component {
   render() {
     let { handleSubmit } = this.props
     return (
-      <section className="register clearfix" style={{ paddingTop: '10%' }}>
-        <div className="row">
-          <div className="m-auto col-md-2 col-lg-2">
+      <section className="register container grid-xl" style={{ paddingTop: '10%' }}>
+        <div className="columns">
+          <div className="column col-ml-auto col-mr-auto col-3 col-lg-3">
             <form onSubmit={handleSubmit((props) => {this.submitForm(props)})}>
-              <div className="card">
-                <div className="card-block">
-                <div className="card-title text-center">
-                  Sign-up
-                </div>
-                <div className="card-text">
+              <div className="panel">
+                <div className="panel-header">
+                    <div className="panel-title h5">
+                      Sign-up
+                    </div>
+                <div className="panel-body">
                 <br />
                 {_.map(REGISTER, renderField.bind(this))}
                   <div className="form-group text-right">

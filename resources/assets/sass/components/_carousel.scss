@@ -1,0 +1,30 @@
+.product {
+    &-carousel {
+        position: relative;
+        min-height: 465px;
+        .image-loader {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            img {
+
+            }
+        }
+        &-controller {
+            ul {
+                margin: 0;
+                li {
+                    display: inline-table;
+                    width: 120px;
+                    height: 78px;
+                    .image-loader {
+                        min-height: 73px;
+                        img {
+                            padding: 5px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

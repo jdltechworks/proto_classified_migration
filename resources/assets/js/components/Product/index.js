@@ -26,7 +26,6 @@ class Products extends Component {
         const groupedCollection = chunk(list, 4)
         return(
             <Scroller more={Product.more} url={url} take={list.length}>
-                <Search {...props} />
                 <div className="columns">
                     <Filter {...props} />
                     <div className="column col-9 col-xl-9 col-lg-9 col-md-9 col-sm-12 col-xs-12">

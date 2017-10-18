@@ -90,6 +90,9 @@ export const reducer = createReducer({
     [types.INITITAL_COLLECTION]: (state, { list }) => {
         return {...state, list}
     },
+    [types.FETCHING_SINGLE]: (state, { collection }) => {
+        return {...state, product: {}, related: []}
+    },
     [types.FETCHED_SINGLE]: (state, { collection }) => {
         return {...state, ...collection}
     },
