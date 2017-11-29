@@ -77,7 +77,7 @@ class Product extends Component {
                     </div>
                 </div>
                 <div className="columns">
-                    <div className="column col-12">
+                    <div className="column col8">
                         <h5>You might also be interested: </h5>
                     </div>
                     {map(related, (product, index) => (
@@ -89,9 +89,7 @@ class Product extends Component {
                               ))}
                             </div>
                             <div className="card-header text-right">
-                                <h6 className="card-title">
-                                    <a href={`/product/${product.slug}`}>{product.title}</a>
-                                </h6>
+                                <a className="card-title" href={`/product/${product.slug}`}>{product.title}</a>
                                 <div className="card-subtitle"><span>Php {product.price}</span></div>
                             </div>
                           </div>

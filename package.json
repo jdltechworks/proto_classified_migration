@@ -21,6 +21,7 @@
     "css-loader": "^0.28.4",
     "file-loader": "^1.1.5",
     "font-awesome": "^4.7.0",
+    "ionicons": "2.0.1",
     "laravel-mix": "^1.0.7",
     "lodash": "^4.17.4",
     "moment": "^2.18.1",

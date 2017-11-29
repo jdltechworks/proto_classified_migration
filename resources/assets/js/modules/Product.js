@@ -15,12 +15,18 @@ export const initialState = {
 export const types = createConstants('product')(
     'FETCHING',
     'FETCHED',
-    'ERROR',
     'FETCHING_SINGLE',
     'FETCHED_SINGLE',
     'INITITAL_COLLECTION',
     'REQUESTING_MORE_PRODUCTS',
-    'REQUEST_MORE_PRODUCTS_COMPLETE'
+    'REQUEST_MORE_PRODUCTS_COMPLETE',
+    'FETCH_FAILED',
+    'CREATING',
+    'CREATED',
+    'UPDATING',
+    'UPDATED',
+    'DELETING',
+    'DELETED'
 )
 
 const increment = value => value += value
@@ -39,6 +45,64 @@ export const actions = {
                 type: types.INITITAL_COLLECTION,
                 list: [].concat(currCollection)
             })
+        }
+    },
+    create(values) {
+        const body = new FormData()
+        const headers = new Headers({
+            "X-CSRFToken": values.csrf_token
+        })
+
+        map(values, (value, key) => {
+            if(key == 'images') {
+                for(var i in value) {
+                    body.append('file', value[i])
+                }
+                return
+            }
+            body.append(key, value)
+        })
+
+        return (dispatch, getState) => {
+            return fetch(`/product`, {
+                method: 'POST',
+                credentials: 'same-origin',
+                headers,
+                body
+            })
+            .then((res) => handResponse(res))
+            .then((json) => dispatch({ type: types.FETCHED, ...json }))
+            .catch(err => {
+                console.log(err)
+                dispatch({type: types.FETCH_FAILED, message: err})
+            })
+        }
+    },
+    update(id, values) {
+        const body = new FormData()
+
+        map(values, (value, key) => body.append(key, value))
+
+        return (dispatch, getState) => {
+            return fetch(`/product`, {
+                method: 'PUT',
+                credentials: 'same-origin',
+                body
+            })
+            .then(({ json }) => json())
+            .then((json) => dispatch({ type: types.CREATED, ...json }))
+            .catch(err => dispatch({type: types.FETCH_FAILED, message: err }))
+        }
+    },
+    delete(id) {
+        return (dispatch, getState) => {
+            return fetch(`/product/{id}`, {
+                method: 'DELETE',
+                credentials: 'same-origin'
+            })
+            .then(({ json }) => json())
+            .then((json) => dispatch({ type: types.FETCHED, ...json}))
+            .catch(err => dispatch({type: types.FETCH_FAILED, message: err }))
         }
     },
     more(url, take) {
@@ -102,6 +166,12 @@ export const reducer = createReducer({
             isAppending: true
         }
     },
+    [types.CREATING](state, { details, message }) {
+        return {
+            ...state,
+            details
+        }
+    },
     [types.REQUEST_MORE_PRODUCTS_COMPLETE]: (state, { list }) => {
         return { ...state, list: [...state.list].concat(list) }
     },
@@ -109,7 +179,6 @@ export const reducer = createReducer({
         return { ...state, list }
     },
     [types.ERROR]: (state, { error }) => {
-        console.log(error)
         return { ...state, ...error }
     }
 })

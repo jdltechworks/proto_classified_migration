@@ -41,9 +41,9 @@ class Products extends Component {
                                       ))}
                                     </div>
                                     <div className="card-header text-right">
-                                        <h6 className="card-title">
+                                        <p className="card-title">
                                             <Link to={`/product/${product.slug}`}>{product.title}</Link>
-                                        </h6>
+                                        </p>
                                         <div className="card-subtitle"><span>Php {product.price}</span></div>
                                     </div>
                                   </div>

@@ -5,7 +5,6 @@ export default class AuthNavbar extends Component {
         e.preventDefault()
     }
     render() {
-
         return null
     }
 }

@@ -1,11 +1,14 @@
-$fa-font-path: '/fonts/font-awesome';
-
-@import "~font-awesome/scss/font-awesome";
+$ionicons-font-path: './fonts/ionicons';
+$fa-font-path: "~font-awesome/fonts";
+@import "~ionicons/scss/ionicons";
 @import "theme/variables";
 @import "theme/spectre-icons";
 @import "theme/spectre";
 @import "theme/spectre-exp";
 @import "theme/typography";
+
+@import "~font-awesome/scss/font-awesome";
+
 @import "components/animation";
 @import "components/base";
 @import "components/loaders";
@@ -13,3 +16,13 @@ $fa-font-path: '/fonts/font-awesome';
 @import "components/regions";
 @import "components/carousel";
 @import "components/product";
+
+
+
+@import "constants/vars";
+
+@import "constants/vars";
+@import "components/layout";
+@import "components/header";
+@import "components/thumbnail";
+@import "components/uploader";

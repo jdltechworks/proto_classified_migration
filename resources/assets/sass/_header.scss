@@ -1,0 +1,11 @@
+.header {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    background: #ffffff;
+    border-bottom: $border;
+    .tab {
+        border: none;
+        margin: 0;
+    }
+}
