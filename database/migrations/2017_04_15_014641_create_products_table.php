@@ -20,10 +20,10 @@ class CreateProductsTable extends Migration
             $table->increments('id');
             $table->integer('user_id');
             $table->longText('description');
-            $table->integer('quantity');
             $table->float('price', 8, 2);
             $table->string('slug');
             $table->timestamps();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

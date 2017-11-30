@@ -5,9 +5,10 @@ import RegisterForm from '../components/Forms/RegisterForm'
 class Register extends Component {
     render() {
         const { csrf_token } = this.props
-        console.log(this.props)
         return (
-            <RegisterForm getFormValues={(values) => console.log(values)} csrf_token={csrf_token}/>
+            <RegisterForm getFormValues={
+                (values) => console.log(values)
+            } csrf_token={csrf_token} />
         )
     }
 }
