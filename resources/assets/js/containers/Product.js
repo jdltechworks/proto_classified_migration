@@ -18,8 +18,9 @@ class ProductContainer extends Component {
             }
             return(
                 <ProductForm csrf_token={csrf_token} getFormValues={(values) => {
-                console.log(values)
-            }}/>)
+                    console.log(values)
+                }}/>
+            )
         }
         return(<Products {...this.props} />)
 

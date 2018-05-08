@@ -10,9 +10,9 @@ import React, { Component, Children, cloneElement } from 'react'
  */
 class CoreForm extends Component {
     componentDidMount() {
-
         const { initialize, csrf_token } = this.props
         initialize({ csrf_token })
+
     }
     render() {
         const { props } = this

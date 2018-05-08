@@ -7,25 +7,11 @@
         <link rel="stylesheet" href="{{mix('css/app.css')}}">
     </head>
     <body>
-        <div id="main"></div>
+        <div id="main"
+            data-csrf_token="{{csrf_token()}}"
+            data-collection="@if(isset($collection)) {{$collection}} @endif"
+            data-url="{{url('/')}}"
+        ></div>
         <script src={{mix('js/pace.min.js')}}></script>
         <script src={{mix('js/app.js')}}></script>
-        @if(isset($collection))
-            <script>
-                const props = {
-                  collection: {!!$collection!!},
-                  csrf_token: "{{csrf_token()}}",
-                  url: "{{url('/')}}"
-                }
-                app(props, 'main')
-            </script>
-        @else
-          <script>
-            const props = {
-              csrf_token: "{{csrf_token()}}"
-            }
-            app(props, 'main')
-          </script>
-        @endif
-    </body>
 </html>
