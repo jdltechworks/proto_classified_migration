@@ -1,6 +1,5 @@
-$ionicons-font-path: './fonts/ionicons';
 $fa-font-path: "~font-awesome/fonts";
-@import "~ionicons/scss/ionicons";
+@import "~ionicons/dist/scss/ionicons";
 @import "theme/variables";
 @import "theme/spectre-icons";
 @import "theme/spectre";
