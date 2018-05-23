@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
 import { createRootReducer as processModules } from 'redux-module-builder'
-import { routerReducer as routing, push } from 'react-router-redux'
+import { routerReducer as routing } from 'react-router-redux'
 import { reducer as form } from 'redux-form'
 
 /**
@@ -22,9 +22,6 @@ const modules = {
 }
 
 const initialActions = {
-    routing: {
-        navigateTo: path => dispatch => dispatch(push(path))
-    }
 }
 
 /**

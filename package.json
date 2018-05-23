@@ -41,6 +41,7 @@
     "url-loader": "^1.0.1"
   },
   "dependencies": {
+    "cross-fetch": "^2.2.0",
     "loaders.css": "^0.1.2"
   }
 }

@@ -3,7 +3,8 @@ import {createApiHandler, createApiAction} from 'redux-module-builder/api'
 import map from 'lodash/map'
 import isEmpty from 'lodash/isEmpty'
 import includes from 'lodash/includes'
-import { push } from 'react-router-redux'
+
+import fetch from 'cross-fetch'
 
 export const types = createConstants('auth')(
     'LOGIN',
@@ -41,7 +42,6 @@ export const actions = {
                         type: types.IS_AUTHENITCATED,
                         session
                     })
-                    dispatch(push('/'))
                 }
             }
 
@@ -52,7 +52,7 @@ export const actions = {
         return (dispatch, getState) => {
 
             dispatch({ type: types.CHECK })
-            
+
             if(!isEmpty(curr_user)) {
                 dispatch({
                     type: types.IS_AUTHENITCATED,
@@ -68,7 +68,7 @@ export const actions = {
                         session
                     })
                 } else {
-                    dispatch(push('/login'))
+
                 }
             }
         }

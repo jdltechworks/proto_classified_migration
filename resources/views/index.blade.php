@@ -10,8 +10,6 @@
         <div id="main"
             data-csrf_token="{{csrf_token()}}"
             data-collection="@if(isset($collection)) {{$collection}} @endif"
-            data-url="{{url('/')}}"
-        ></div>
-        <script src={{mix('js/pace.min.js')}}></script>
-        <script src={{mix('js/app.js')}}></script>
+            data-url="{{url('/')}}">@ssr('server/Server.js', ['crsf_token' => csrf_token(), 'url' => request()->path(), 'collection' => isset($collection) ? $collection : []])</div>
+        <script src="{{mix('js/app.js')}}"></script>
 </html>

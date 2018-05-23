@@ -1,5 +1,6 @@
 import map from 'lodash/map'
 import {createConstants, createReducer} from 'redux-module-builder'
+import fetch from 'cross-fetch'
 
 export const types = createConstants('auth')(
     'LOGIN',

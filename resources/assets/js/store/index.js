@@ -17,18 +17,9 @@ const creator = (composer) => {
   return compose
 }
 
-const setHistoryType = (historyType, request) => {
 
-  if(request) return historyType(request.url)
-
-  return historyType
-
-}
-export default (historyType, composer, request) => {
-
+export default (historyType, composer) => {
     const create = creator(composer)
-
-    const history = setHistoryType(historyType, request)
 
     let composeStore = create(
         applyMiddleware(...middlewares),
@@ -41,7 +32,7 @@ export default (historyType, composer, request) => {
     )
 
     return {
-        history: syncHistoryWithStore(history, store),
+        history: syncHistoryWithStore(historyType, store),
         store,
         actions: bindActionCreatorsToStore(actions, store)
     }

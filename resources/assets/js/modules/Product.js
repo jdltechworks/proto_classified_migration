@@ -1,8 +1,8 @@
 import includes from 'lodash/includes'
-import { push } from 'react-router-redux'
 import { createConstants, createReducer } from 'redux-module-builder'
 import {createApiHandler, createApiAction} from 'redux-module-builder/api'
 import map from 'lodash/map'
+import fetch from 'cross-fetch'
 
 export const initialState = {
     list: [],
@@ -31,10 +31,10 @@ export const types = createConstants('product')(
 
 const increment = value => value += value
 
-const headers = new Headers({
+const headers = {
     Accept: 'application/json',
     'Content-Type': 'application/json'
-})
+}
 
 
 export const actions = {
@@ -49,9 +49,9 @@ export const actions = {
     },
     create(values) {
         const body = new FormData()
-        const headers = new Headers({
+        const headers = {
             "X-CSRFToken": values.csrf_token
-        })
+        }
 
         map(values, (value, key) => {
             if(key == 'images') {
