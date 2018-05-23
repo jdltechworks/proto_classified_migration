@@ -1,7 +1,7 @@
 import { hydrate } from 'react-dom'
 import React, { Component } from 'react'
 import ClientProvider from './provider/Client'
-import 'whatwg-fetch'
+
 
 ((w, d, target) => {
     const elem = document.getElementById(target)
