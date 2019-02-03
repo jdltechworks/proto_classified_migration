@@ -5,10 +5,11 @@
     "license": "MIT",
     "type": "project",
     "require": {
-        "php": "7.2.*",
+        "php": "7.3.*",
         "fideloper/proxy": "~4.0",
         "hadefication/vormir": "^0.0.1",
-        "laravel/framework": "5.6.*",
+        "laravel/framework": "5.7.*",
+        "laravel/passport": "^7.1",
         "laravel/tinker": "~1.0"
     },
     "require-dev": {

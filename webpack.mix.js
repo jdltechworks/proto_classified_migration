@@ -1,5 +1,5 @@
-let mix = require('laravel-mix');
-
+const mix = require('laravel-mix');
+const path = require('path');
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -10,7 +10,26 @@ let mix = require('laravel-mix');
  | file for the application as well as bundling up all the JS files.
  |
  */
+const isDevelop = /develop/.test(process.env.NODE_ENV);
 
-mix.react('resources/assets/js/app.js', 'public/js')
-    .react('resources/assets/js/provider/Server.js', 'public/js/server')
-    .sass('resources/assets/sass/app.scss', 'public/css')
+const rules = isDevelop ? [
+  {
+    test: /\.js?$/,
+    exclude: /node_modules/,
+    enforce: 'pre',
+    use: 'eslint-loader',
+  },
+] : [];
+
+mix.webpackConfig({
+  module: {
+    rules,
+  },
+  resolve: {
+    modules: [path.resolve(__dirname, 'resources/js'), 'node_modules'],
+  },
+});
+
+mix.react('resources/js/app.js', 'public/js')
+  .sass('resources/sass/app.scss', 'public/css')
+  .sourceMaps();

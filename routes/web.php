@@ -20,7 +20,9 @@ $this->post('accounts/logout', 'Auth\LoginController@logout')->name('logout');
 $this->get('accounts/register', 'Auth\RegisterController@showRegistrationForm')->name('register');
 $this->post('accounts/register', 'Auth\RegisterController@register');
 
-Route::resource('product', 'ProductController');
 Route::resource('/region', 'RegionController');
 
-Route::get('/{path?}', 'HomeController@index');
+Route::get('{all}', function () {
+  return view('spa');
+})->where('all', '^((?!api).)*');
+

@@ -28,7 +28,8 @@ class BarangayTableSeeder extends Seeder
         $barangay = Storage::get('public/ph-location/refbrgy.json');
 
         $barangay_array = json_decode($barangay)->RECORDS;
-        foreach($barangay_array as $value) {
+        foreach($barangay_array as $key => $value) {
+            print($key. " " .$value->brgyDesc . " has beed stored\n");
             DB::table('barangays')->insert([
                 'region_id' => (int)$value->regCode,
                 'name' => $value->brgyDesc,

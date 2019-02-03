@@ -28,7 +28,7 @@ $factory->define(App\Models\Product::class, function (Faker\Generator $faker) {
     return [
         'title' => $faker->words(3, true),
         'description' => $faker->realText,
-        'price' => $faker->randomFloat,
+        'price' => $faker->randomNumber(2),
         'brand' => $faker->realText,
         'size' => $faker->randomNumber,
         'user_id' => function() {

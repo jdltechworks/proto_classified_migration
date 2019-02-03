@@ -28,11 +28,8 @@ class ProductController extends Controller
             $collection = $collection->skip($skip)->get();
         }
 
-        if($request->wantsJson()) {
-            return response(compact('collection'), 200);
-        } else {
-            return view('index', compact('collection'));
-        }
+        return response(compact('collection'), 200);
+
     }
 
     /**

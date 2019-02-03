@@ -17,8 +17,7 @@ class CreateProductsTable extends Migration
             $table->string('title');
             $table->string('brand');
             $table->integer('size');
-            $table->increments('id');
-            $table->integer('user_id');
+            $table->integer('user_id')->unsigned();
             $table->longText('description');
             $table->float('price', 8, 2);
             $table->string('slug');

@@ -15,25 +15,11 @@ class RolesSeeder extends Seeder
         $seller = Role::create([
             'name' => 'Seller',
             'slug' => 'seller',
-            'permissions' => [
-                'create-product' => true,
-                'update-product' => true,
-                'publish-product' => true,
-            ]
         ]);
 
         $super_user = Role::create([
             'name' => 'SuperUser',
             'slug' => 'super_user',
-            'permissions' => [
-                'create-product' => true,
-                'update-product' => true,
-                'publish-product' => true,
-                'delete-product' => true,
-                'create-user' => true,
-                'update-user' => true,
-                'delete-user' => true,
-            ]
         ]);
     }
 }
